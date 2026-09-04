@@ -1,9 +1,10 @@
-const CACHE_NAME = "spinghar-orders-cache-v7";
+const CACHE_NAME = "spinghar-orders-cache-v8";
 const ASSETS = [
   "./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png",
   "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js",
   "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js",
   "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js",
 ];
 
 self.addEventListener("install", (event) => {
