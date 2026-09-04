@@ -74,6 +74,8 @@
   .btn-ghost { border: 1px solid var(--rule); background: var(--glass); color: var(--primary); }
   .btn-sm { padding: 5px 10px; font-size: 12px; }
   .btn-sm svg { width: 14px; height: 14px; vertical-align: -2px; }
+  .btn-icon { width: 30px; height: 30px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; }
+  .btn-icon svg { width: 15px; height: 15px; }
   .btn:disabled { cursor: not-allowed; }
   main { padding: 16px 14px 96px; }
   @media (min-width: 640px) { main { padding: 20px 18px 48px; } }
@@ -137,7 +139,7 @@
   .search-wrap { position: relative; width: 100%; max-width: 340px; margin-bottom: 18px; }
   .search-wrap svg { position:absolute; left:14px; top:50%; transform:translateY(-50%); width:16px; height:16px; color:var(--muted); pointer-events:none; }
   .search-input { width: 100%; max-width: 340px; margin-bottom: 0; border-radius: 999px !important; padding: 11px 16px 11px 38px !important; background: rgba(255,255,255,.55) !important; }
-  .ledger-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--rule); background: rgba(255,255,255,.30); }
+  .ledger-row { display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--rule); background: rgba(255,255,255,.30); }
   .ledger-row.strong { background: rgba(255,255,255,.55); }
   .ledger-row:last-child { border-bottom: none; }
   .ledger-label { font-size: 13px; color: #33506E; }
@@ -899,7 +901,7 @@ function renderReceipt() {
   return `
     <div class="row-between">
       <button class="btn btn-ghost btn-sm" onclick="setTab('orders')">← Back</button>
-      <button class="btn btn-primary btn-sm" onclick="captureAndShare()">${ICONS.camera} Screenshot</button>
+      <button class="btn btn-primary btn-icon" onclick="captureAndShare()" title="Screenshot &amp; Share">${ICONS.camera}</button>
     </div>
     <div style="display:flex;justify-content:center;margin-top:16px">
       <div id="receipt-card" class="receipt-card">
@@ -1307,7 +1309,7 @@ function renderForm() {
     <div class="row-between">
       <h1 class="page">${f.isNew ? "New Order" : "Edit Order"}</h1>
       <div style="display:flex;gap:6px;flex-wrap:wrap">
-        <button class="btn btn-primary btn-sm" onclick="captureOrderForm()">${ICONS.camera} Screenshot</button>
+        <button class="btn btn-primary btn-icon" onclick="captureOrderForm()" title="Screenshot &amp; Share">${ICONS.camera}</button>
         <button class="btn btn-ghost btn-sm" onclick="cancelForm()">← Back</button>
       </div>
     </div>
