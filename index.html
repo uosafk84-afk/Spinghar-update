@@ -72,6 +72,8 @@
   .btn-primary { background: linear-gradient(135deg, var(--secondary), var(--primary)); color: #fff; border: none; font-weight: 700; box-shadow: 0 8px 20px rgba(21,151,229,.32); position: relative; overflow: hidden; }
   .btn-primary::after { content:""; position:absolute; inset:0; background:linear-gradient(120deg,rgba(255,255,255,.35),transparent 45%); pointer-events:none; }
   .btn-ghost { border: 1px solid var(--rule); background: var(--glass); color: var(--primary); }
+  .btn-sm { padding: 5px 10px; font-size: 12px; }
+  .btn-sm svg { width: 14px; height: 14px; vertical-align: -2px; }
   .btn:disabled { cursor: not-allowed; }
   main { padding: 16px 14px 96px; }
   @media (min-width: 640px) { main { padding: 20px 18px 48px; } }
@@ -241,12 +243,15 @@
   .more-item { display:flex; flex-direction:column; align-items:center; gap:4px; padding:9px 5px; border-radius:14px; border:1px solid var(--rule); background:var(--glass); cursor:pointer; color:var(--ink); font-size:11px; font-weight:600; }
   .more-item svg { width:20px; height:20px; color: var(--primary); }
 
-  .items-table th, .items-table td { padding: 3px 3px; font-size: 11px; }
-  .items-table td:first-child { font-size: 11px; padding-right: 2px; white-space: nowrap; }
-  .items-table td:nth-child(2), .items-table th:nth-child(2) { padding-left: 2px; padding-right: 3px; }
-  .items-table td:nth-child(3), .items-table th:nth-child(3) { padding-left: 2px; }
-  .items-table .items-price { width: 44px; padding: 3px 4px; font-size: 11px; }
-  .items-table .items-qty { width: 30px; padding: 3px 4px; font-size: 11px; }
+  .items-table { table-layout: fixed; }
+  .items-table th, .items-table td { padding: 3px 2px; font-size: 11px; overflow: hidden; }
+  .items-table th:nth-child(1), .items-table td:nth-child(1) { width: 15%; white-space: nowrap; text-overflow: ellipsis; }
+  .items-table th:nth-child(2), .items-table td:nth-child(2) { width: 17%; padding-left: 1px; }
+  .items-table th:nth-child(3), .items-table td:nth-child(3) { width: 24%; padding-left: 1px; }
+  .items-table th:nth-child(4), .items-table td:nth-child(4) { width: 16%; padding-left: 1px; }
+  .items-table th:nth-child(5), .items-table td:nth-child(5) { width: 28%; }
+  .items-table .items-price { width: 100%; max-width: 46px; padding: 3px 2px; font-size: 11px; box-sizing: border-box; }
+  .items-table .items-qty { width: 100%; max-width: 30px; padding: 3px 2px; font-size: 11px; box-sizing: border-box; }
 
   /* ---- Order form screenshot card ---- */
   .order-form-card { background:#ffffff; border-radius:16px; padding:14px; }
@@ -893,8 +898,8 @@ function renderReceipt() {
   const lines = c.lines.filter((l) => l.qty > 0);
   return `
     <div class="row-between">
-      <button class="btn btn-ghost" onclick="setTab('orders')">← Back</button>
-      <button class="btn btn-primary" onclick="captureAndShare()">${ICONS.camera} Screenshot &amp; Share</button>
+      <button class="btn btn-ghost btn-sm" onclick="setTab('orders')">← Back</button>
+      <button class="btn btn-primary btn-sm" onclick="captureAndShare()">${ICONS.camera} Screenshot</button>
     </div>
     <div style="display:flex;justify-content:center;margin-top:16px">
       <div id="receipt-card" class="receipt-card">
@@ -932,7 +937,15 @@ async function captureElementAndShare(elId, order, shareTitle) {
   }
   toast("Preparing image…", "success");
   try {
-    const canvas = await html2canvas(el, { scale: 2, backgroundColor: "#ffffff" });
+    let canvas;
+    try {
+      // foreignObjectRendering draws through the real browser text engine, which
+      // renders joined Pashto/Arabic script correctly. The plain canvas renderer
+      // draws each glyph separately and breaks that joining.
+      canvas = await html2canvas(el, { scale: 2, backgroundColor: "#ffffff", useCORS: true, foreignObjectRendering: true });
+    } catch (e) {
+      canvas = await html2canvas(el, { scale: 2, backgroundColor: "#ffffff", useCORS: true });
+    }
     canvas.toBlob(async (blob) => {
       if (!blob) { toast("Could not create the image.", "error"); return; }
       const safeName = (order && order.customerName ? order.customerName : "order").replace(/[^a-z0-9]+/gi, "-").toLowerCase();
@@ -1293,13 +1306,12 @@ function renderForm() {
   return `
     <div class="row-between">
       <h1 class="page">${f.isNew ? "New Order" : "Edit Order"}</h1>
-      <button class="btn btn-ghost" onclick="cancelForm()">← Back</button>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="btn btn-primary btn-sm" onclick="captureOrderForm()">${ICONS.camera} Screenshot</button>
+        <button class="btn btn-ghost btn-sm" onclick="cancelForm()">← Back</button>
+      </div>
     </div>
     <div class="stitch">${"<span></span>".repeat(28)}</div>
-
-    <div class="actions" style="margin-top:0;margin-bottom:16px">
-      <button class="btn btn-primary" onclick="captureOrderForm()">${ICONS.camera} Screenshot &amp; Share</button>
-    </div>
 
     <div id="order-form-card" class="order-form-card">
     <div class="field-row">
