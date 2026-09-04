@@ -74,8 +74,8 @@
   .btn-ghost { border: 1px solid var(--rule); background: var(--glass); color: var(--primary); }
   .btn-sm { padding: 5px 10px; font-size: 12px; }
   .btn-sm svg { width: 14px; height: 14px; vertical-align: -2px; }
-  .btn-icon { width: 30px; height: 30px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; }
-  .btn-icon svg { width: 15px; height: 15px; }
+  .btn-icon { width: 30px !important; height: 30px !important; min-width: 30px; padding: 0 !important; display: inline-flex; align-items: center; justify-content: center; border-radius: 50% !important; overflow: hidden; line-height: 1; }
+  .btn-icon svg { width: 15px !important; height: 15px !important; display: block; }
   .btn:disabled { cursor: not-allowed; }
   main { padding: 16px 14px 96px; }
   @media (min-width: 640px) { main { padding: 20px 18px 48px; } }
@@ -247,11 +247,11 @@
 
   .items-table { table-layout: fixed; }
   .items-table th, .items-table td { padding: 3px 2px; font-size: 11px; }
-  .items-table th:nth-child(1), .items-table td:nth-child(1) { width: 12%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-  .items-table th:nth-child(2), .items-table td:nth-child(2) { width: 15%; padding-left: 1px; }
-  .items-table th:nth-child(3), .items-table td:nth-child(3) { width: 24%; padding-left: 1px; }
+  .items-table th:nth-child(1), .items-table td:nth-child(1) { width: 9%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .items-table th:nth-child(2), .items-table td:nth-child(2) { width: 16%; padding-left: 1px; }
+  .items-table th:nth-child(3), .items-table td:nth-child(3) { width: 25%; padding-left: 1px; }
   .items-table th:nth-child(4), .items-table td:nth-child(4) { width: 14%; padding-left: 1px; }
-  .items-table th:nth-child(5), .items-table td:nth-child(5) { width: 35%; }
+  .items-table th:nth-child(5), .items-table td:nth-child(5) { width: 36%; }
   .items-table .items-price { width: 100%; max-width: 52px; padding: 4px 2px; font-size: 11px; border-radius: 8px; box-sizing: border-box; }
   .items-table .items-qty { width: 100%; max-width: 30px; padding: 4px 2px; font-size: 11px; border-radius: 8px; box-sizing: border-box; }
 
@@ -680,7 +680,7 @@ const ICONS = {
   emptyCustomers: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>`,
   emptyMoney: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>`,
   receipt: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3h16v18l-3-2-3 2-3-2-3 2-3-2-1 2z"/><path d="M8 8h8M8 12h8M8 16h4"/></svg>`,
-  camera: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>`,
+  camera: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>`,
   share: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>`,
 };
 
