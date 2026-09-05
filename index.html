@@ -72,10 +72,6 @@
   .btn-primary { background: linear-gradient(135deg, var(--secondary), var(--primary)); color: #fff; border: none; font-weight: 700; box-shadow: 0 8px 20px rgba(21,151,229,.32); position: relative; overflow: hidden; }
   .btn-primary::after { content:""; position:absolute; inset:0; background:linear-gradient(120deg,rgba(255,255,255,.35),transparent 45%); pointer-events:none; }
   .btn-ghost { border: 1px solid var(--rule); background: var(--glass); color: var(--primary); }
-  .btn-sm { padding: 5px 10px; font-size: 12px; }
-  .btn-sm svg { width: 14px; height: 14px; vertical-align: -2px; }
-  .btn-icon { width: 30px !important; height: 30px !important; min-width: 30px; padding: 0 !important; display: inline-flex; align-items: center; justify-content: center; border-radius: 50% !important; overflow: hidden; line-height: 1; }
-  .btn-icon svg { width: 15px !important; height: 15px !important; display: block; }
   .btn:disabled { cursor: not-allowed; }
   main { padding: 16px 14px 96px; }
   @media (min-width: 640px) { main { padding: 20px 18px 48px; } }
@@ -129,20 +125,23 @@
   input.qty, input.money-input { font-family: var(--num-font); width: 78px; text-align: right; padding: 6px 8px; }
   input::placeholder { color: #9FB4C7; }
   input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(21,151,229,.16); }
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  thead tr { border-bottom: 2px solid rgba(16,42,67,.14); }
-  th { text-align: left; padding: 5px 6px; font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; border: 1px solid var(--rule); }
+  thead tr { border-bottom: 1px solid var(--rule); }
+  th { text-align: left; padding: 4px 5px; font-size: 10px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted); font-weight: 600; border: 1px solid var(--rule); }
   th.right, td.right { text-align: right; }
-  td { padding: 6px 6px; font-size: 13px; border-bottom: 1px solid var(--rule); }
+  td { padding: 4px 5px; font-size: 12px; border: 1px solid var(--rule); line-height: 1.2; }
+  td .money-input, td .qty, td .stock-adjust { border: none; box-shadow: none; background: transparent; padding: 2px 3px; }
   tr.alt { background: rgba(21,151,229,.04); }
   .num { font-family: var(--num-font); }
   .search-wrap { position: relative; width: 100%; max-width: 340px; margin-bottom: 18px; }
   .search-wrap svg { position:absolute; left:14px; top:50%; transform:translateY(-50%); width:16px; height:16px; color:var(--muted); pointer-events:none; }
   .search-input { width: 100%; max-width: 340px; margin-bottom: 0; border-radius: 999px !important; padding: 11px 16px 11px 38px !important; background: rgba(255,255,255,.55) !important; }
-  .ledger-row { display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--rule); background: rgba(255,255,255,.30); }
-  .ledger-row.strong { background: rgba(255,255,255,.55); }
+  .ledger-card { border: 1px solid var(--rule); background: #ffffff; backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: none; }
+  .ledger-row { display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center; padding: 6px 10px; border-bottom: 1px solid var(--rule); background: transparent; }
+  .ledger-row.strong { background: rgba(21,151,229,.05); }
   .ledger-row:last-child { border-bottom: none; }
-  .ledger-label { font-size: 13px; color: #33506E; }
+  .ledger-label { font-size: 13px; color: #33506E; direction: rtl; text-align: right; unicode-bidi: isolate; border-left: 1px solid var(--rule); padding-left: 10px; }
+  .ledger-row .num, .ledger-row .money { direction: ltr; unicode-bidi: isolate; }
   .ledger-row.strong .ledger-label { color: var(--ink); font-weight: 700; }
   .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
   .error { font-size: 12px; color: var(--pending); margin-top: 8px; }
@@ -245,18 +244,15 @@
   .more-item { display:flex; flex-direction:column; align-items:center; gap:4px; padding:9px 5px; border-radius:14px; border:1px solid var(--rule); background:var(--glass); cursor:pointer; color:var(--ink); font-size:11px; font-weight:600; }
   .more-item svg { width:20px; height:20px; color: var(--primary); }
 
-  .items-table { table-layout: fixed; }
-  .items-table th, .items-table td { padding: 3px 2px; font-size: 11px; }
-  .items-table th:nth-child(1), .items-table td:nth-child(1) { width: 9%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-  .items-table th:nth-child(2), .items-table td:nth-child(2) { width: 16%; padding-left: 1px; }
-  .items-table th:nth-child(3), .items-table td:nth-child(3) { width: 25%; padding-left: 1px; }
-  .items-table th:nth-child(4), .items-table td:nth-child(4) { width: 14%; padding-left: 1px; }
-  .items-table th:nth-child(5), .items-table td:nth-child(5) { width: 36%; }
-  .items-table .items-price { width: 100%; max-width: 52px; padding: 4px 2px; font-size: 11px; border-radius: 8px; box-sizing: border-box; }
-  .items-table .items-qty { width: 100%; max-width: 30px; padding: 4px 2px; font-size: 11px; border-radius: 8px; box-sizing: border-box; }
-
-  /* ---- Order form screenshot card ---- */
-  .order-form-card { background:#ffffff; border-radius:16px; padding:14px; }
+  .items-table { table-layout: fixed; width: 100%; border: 1px solid var(--rule); }
+  .items-table th, .items-table td { padding: 2px 3px; font-size: 11px; border: 1px solid var(--rule); }
+  .items-table th:first-child, .items-table td.items-name { width: 15%; font-weight: 600; }
+  .items-table th:nth-child(2), .items-table td.items-size { width: 13%; font-size: 10px; }
+  .items-table th:nth-child(3) { width: 24%; }
+  .items-table th:nth-child(4) { width: 18%; }
+  .items-table th:last-child, .items-table td:last-child { width: 30%; }
+  .items-table .items-price { width: 100%; max-width: 46px; padding: 2px 2px; font-size: 11px; border: none; box-shadow: none; background: transparent; }
+  .items-table .items-qty { width: 100%; max-width: 34px; padding: 2px 2px; font-size: 11px; border: none; box-shadow: none; background: transparent; }
 
   /* ---- Receipt / screenshot card ---- */
   .receipt-card { background:#ffffff; border:1px solid #E2ECF5; border-radius:16px; padding:20px; width:100%; max-width:360px; box-shadow:0 10px 30px rgba(21,151,229,.14); font-family: var(--body-font); color:#102A43; }
@@ -265,7 +261,8 @@
   .receipt-date { font-size:12px; color:#526777; }
   .receipt-customer { font-size:17px; font-weight:700; margin:6px 0 10px; }
   .receipt-divider { border-top:1px dashed #C9DCEA; margin:10px 0; }
-  .receipt-table { width:100%; border-collapse:collapse; font-size:12px; }
+  .receipt-table { width:100%; border-collapse:collapse; font-size:12px; border: none; }
+  .receipt-table th, .receipt-table td { border: none; }
   .receipt-table th { text-align:left; font-size:10px; text-transform:uppercase; letter-spacing:.04em; color:#7C90A3; padding:2px 2px; }
   .receipt-table th.right, .receipt-table td.right { text-align:right; }
   .receipt-table td { padding:3px 2px; }
@@ -558,6 +555,8 @@ const fmt = (n) => (Number.isFinite(n) ? n : 0).toLocaleString("en-US", { maximu
 const todayISO = () => new Date().toISOString().slice(0, 10);
 const uid = () => Date.now() + "-" + Math.random().toString(36).slice(2, 8);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const SHORT_NAMES = { "Spinghar": "Spin", "Pak Surf": "Pak", "Tahireen Surf": "Tahi", "Enikaas Surf": "Enik", "Waseline": "Wasl" };
+const shortName = (product) => SHORT_NAMES[product] || String(product || "").slice(0, 5);
 
 // ---------- Local export/import (still useful as manual backup) ----------
 function exportData() {
@@ -680,7 +679,7 @@ const ICONS = {
   emptyCustomers: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>`,
   emptyMoney: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>`,
   receipt: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3h16v18l-3-2-3 2-3-2-3 2-3-2-1 2z"/><path d="M8 8h8M8 12h8M8 16h4"/></svg>`,
-  camera: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>`,
+  camera: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>`,
   share: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>`,
 };
 
@@ -891,46 +890,50 @@ function openReceipt(orderId) {
   state.tab = "receipt";
   render();
 }
+function buildReceiptCardInner(order, c) {
+  const lines = c.lines.filter((l) => l.qty > 0);
+  return `
+    <div class="receipt-head">
+      <div class="receipt-brand">Spinghar Orders</div>
+      <div class="receipt-date">${esc(order.date)}</div>
+    </div>
+    <div class="receipt-customer">${esc(order.customerName || "Unnamed")}</div>
+    <div class="receipt-divider"></div>
+    <table class="receipt-table">
+      <thead><tr><th>Item</th><th class="right">Qty</th><th class="right">Price</th><th class="right">Total</th></tr></thead>
+      <tbody>
+        ${lines.length ? lines.map((l) => `<tr><td>${esc(l.product)}${l.size && l.size !== "-" ? ` <span class="receipt-size">(${esc(l.size)})</span>` : ""}</td><td class="right num">${l.qty}</td><td class="right num">${fmt(l.price)}</td><td class="right num">${fmt(l.lineTotal)}</td></tr>`).join("") : `<tr><td colspan="4" class="muted">No items</td></tr>`}
+      </tbody>
+    </table>
+    <div class="receipt-divider"></div>
+    <div class="receipt-row"><span>Order Total</span><span class="num">${fmt(c.orderTotal)} AFN</span></div>
+    <div class="receipt-row"><span>Previous Balance</span><span class="num">${fmt(c.previousBalance)} AFN</span></div>
+    <div class="receipt-row strong"><span>Total Due</span><span class="num">${fmt(c.totalDue)} AFN</span></div>
+    <div class="receipt-row"><span>Received</span><span class="num">${fmt(c.amountReceived)} AFN</span></div>
+    ${c.cashOut ? `<div class="receipt-row"><span>Cash Out</span><span class="num">${fmt(c.cashOut)} AFN</span></div>` : ""}
+    <div class="receipt-row strong ${c.pendingBalance > 0 ? "pending" : "received"}"><span>Pending Balance</span><span class="num">${fmt(c.pendingBalance)} AFN</span></div>
+    <div class="receipt-divider"></div>
+    <div class="receipt-footer">Thank you for your business</div>
+  `;
+}
 function renderReceipt() {
   const o = state.orders.find((x) => x.id === state.receiptOrderId);
   if (!o) {
     return `<div class="row-between"><h1 class="page">Receipt</h1></div><p class="muted">This order could not be found.</p><button class="btn btn-ghost" onclick="setTab('orders')">← Back to Orders</button>`;
   }
   const c = computeOrder(o);
-  const lines = c.lines.filter((l) => l.qty > 0);
   return `
     <div class="row-between">
-      <button class="btn btn-ghost btn-sm" onclick="setTab('orders')">← Back</button>
-      <button class="btn btn-primary btn-icon" onclick="captureAndShare()" title="Screenshot &amp; Share">${ICONS.camera}</button>
+      <button class="btn btn-ghost" onclick="setTab('orders')">← Back</button>
+      <button class="btn btn-primary" onclick="captureAndShare('receipt-card', '${o.id}')">${ICONS.camera} Screenshot &amp; Share</button>
     </div>
     <div style="display:flex;justify-content:center;margin-top:16px">
-      <div id="receipt-card" class="receipt-card">
-        <div class="receipt-head">
-          <div class="receipt-brand">Spinghar Orders</div>
-          <div class="receipt-date">${esc(o.date)}</div>
-        </div>
-        <div class="receipt-customer">${esc(o.customerName || "Unnamed")}</div>
-        <div class="receipt-divider"></div>
-        <table class="receipt-table">
-          <thead><tr><th>Item</th><th class="right">Qty</th><th class="right">Price</th><th class="right">Total</th></tr></thead>
-          <tbody>
-            ${lines.length ? lines.map((l) => `<tr><td>${esc(l.product)}${l.size && l.size !== "-" ? ` <span class="receipt-size">(${esc(l.size)})</span>` : ""}</td><td class="right num">${l.qty}</td><td class="right num">${fmt(l.price)}</td><td class="right num">${fmt(l.lineTotal)}</td></tr>`).join("") : `<tr><td colspan="4" class="muted">No items</td></tr>`}
-          </tbody>
-        </table>
-        <div class="receipt-divider"></div>
-        <div class="receipt-row"><span>Order Total</span><span class="num">${fmt(c.orderTotal)} AFN</span></div>
-        <div class="receipt-row"><span>Previous Balance</span><span class="num">${fmt(c.previousBalance)} AFN</span></div>
-        <div class="receipt-row strong"><span>Total Due</span><span class="num">${fmt(c.totalDue)} AFN</span></div>
-        <div class="receipt-row"><span>Received</span><span class="num">${fmt(c.amountReceived)} AFN</span></div>
-        ${c.cashOut ? `<div class="receipt-row"><span>Cash Out</span><span class="num">${fmt(c.cashOut)} AFN</span></div>` : ""}
-        <div class="receipt-row strong ${c.pendingBalance > 0 ? "pending" : "received"}"><span>Pending Balance</span><span class="num">${fmt(c.pendingBalance)} AFN</span></div>
-        <div class="receipt-divider"></div>
-        <div class="receipt-footer">Thank you for your business</div>
-      </div>
+      <div id="receipt-card" class="receipt-card">${buildReceiptCardInner(o, c)}</div>
     </div>
   `;
 }
-async function captureElementAndShare(elId, order, shareTitle) {
+async function captureAndShare(elId, orderId) {
+  elId = elId || "receipt-card";
   const el = document.getElementById(elId);
   if (!el) return;
   if (typeof html2canvas === "undefined") {
@@ -939,24 +942,17 @@ async function captureElementAndShare(elId, order, shareTitle) {
   }
   toast("Preparing image…", "success");
   try {
-    let canvas;
-    try {
-      // foreignObjectRendering draws through the real browser text engine, which
-      // renders joined Pashto/Arabic script correctly. The plain canvas renderer
-      // draws each glyph separately and breaks that joining.
-      canvas = await html2canvas(el, { scale: 2, backgroundColor: "#ffffff", useCORS: true, foreignObjectRendering: true });
-    } catch (e) {
-      canvas = await html2canvas(el, { scale: 2, backgroundColor: "#ffffff", useCORS: true });
-    }
+    const canvas = await html2canvas(el, { scale: 2, backgroundColor: "#ffffff" });
     canvas.toBlob(async (blob) => {
       if (!blob) { toast("Could not create the image.", "error"); return; }
-      const safeName = (order && order.customerName ? order.customerName : "order").replace(/[^a-z0-9]+/gi, "-").toLowerCase();
+      const order = state.orders.find((o) => o.id === orderId) || (state.editingOrder && state.editingOrder.id === orderId ? state.editingOrder : null);
+      const safeName = (order && order.customerName ? order.customerName : "receipt").replace(/[^a-z0-9]+/gi, "-").toLowerCase();
       const fileName = `order-${safeName}-${(order && order.date) || ""}.png`;
       if (navigator.share && navigator.canShare) {
         try {
           const file = new File([blob], fileName, { type: "image/png" });
           if (navigator.canShare({ files: [file] })) {
-            await navigator.share({ files: [file], title: shareTitle });
+            await navigator.share({ files: [file], title: "Order Receipt" });
             return;
           }
         } catch (e) {
@@ -972,15 +968,8 @@ async function captureElementAndShare(elId, order, shareTitle) {
     }, "image/png");
   } catch (e) {
     console.error("screenshot failed", e);
-    toast("Could not capture the screenshot. Please try again.", "error");
+    toast("Could not capture the receipt. Please try again.", "error");
   }
-}
-async function captureAndShare() {
-  const order = state.orders.find((o) => o.id === state.receiptOrderId);
-  await captureElementAndShare("receipt-card", order, "Order Receipt");
-}
-async function captureOrderForm() {
-  await captureElementAndShare("order-form-card", state.editingOrder, "Order");
 }
 
 function renderPrices() {
@@ -1289,11 +1278,6 @@ function renderOrdersList() {
   `;
 }
 
-function shortProductName(name) {
-  const map = { "Spinghar": "Spin", "Pak Surf": "Pak", "Tahireen Surf": "Tahi", "Enikaas Surf": "Enika", "Waseline": "Wase" };
-  if (map[name]) return map[name];
-  return name.length > 6 ? name.slice(0, 6) : name;
-}
 function renderForm() {
   const f = state.editingOrder;
   const computed = computeOrder(f);
@@ -1306,16 +1290,9 @@ function renderForm() {
   const canSave = f.customerName.trim().length > 0;
 
   return `
-    <div class="row-between">
-      <h1 class="page">${f.isNew ? "New Order" : "Edit Order"}</h1>
-      <div style="display:flex;gap:6px;flex-wrap:wrap">
-        <button class="btn btn-primary btn-icon" onclick="captureOrderForm()" title="Screenshot &amp; Share">${ICONS.camera}</button>
-        <button class="btn btn-ghost btn-sm" onclick="cancelForm()">← Back</button>
-      </div>
-    </div>
+    <h1 class="page">${f.isNew ? "New Order" : "Edit Order"}</h1>
     <div class="stitch">${"<span></span>".repeat(28)}</div>
 
-    <div id="order-form-card" class="order-form-card">
     <div class="field-row">
       <div class="field">
         <label>Customer Name</label>
@@ -1331,14 +1308,14 @@ function renderForm() {
     <h2 class="section">Items</h2>
     <p class="muted" style="margin-bottom:10px">Prices below apply only to this order/customer — changing them here never touches your default price list.</p>
     <div style="overflow-x:auto;margin-bottom:24px">
-      <table class="items-table" style="min-width:0;width:100%">
-        <thead><tr><th>Product</th><th>Size</th><th class="right">Price</th><th class="right">Qty</th><th class="right">Total</th></tr></thead>
+      <table class="items-table">
+        <thead><tr><th>Item</th><th>Sz</th><th class="right">Price</th><th class="right">Qty</th><th class="right">Total</th></tr></thead>
         <tbody>
           ${grouped.map(([name, items]) => items.map((p, idx) => {
             const line = computed.lines.find((l) => l.key === p.key);
             return `<tr>
-              <td>${idx === 0 ? esc(shortProductName(name)) : ""}</td>
-              <td class="muted">${esc(p.size)}</td>
+              <td class="items-name">${idx === 0 ? esc(shortName(name)) : ""}</td>
+              <td class="muted items-size">${esc(p.size)}</td>
               <td class="right"><input id="orderprice-${p.key}" class="money-input items-price" value="${esc(f.unitPrices && f.unitPrices[p.key] != null ? f.unitPrices[p.key] : p.price)}" oninput="updateOrderPrice('${p.key}', this.value)" /></td>
               <td class="right"><input id="qty-${p.key}" class="qty items-qty" placeholder="0" value="${esc(f.items[p.key])}" oninput="updateQty('${p.key}', this.value)" /></td>
               <td class="right num">${line.lineTotal > 0 ? fmt(line.lineTotal) : "–"}</td>
@@ -1368,7 +1345,6 @@ function renderForm() {
         </div>
         ${!state.touchedPrev && f.customerName.trim() ? `<p class="hint">پخوانی بیلانس د ${esc(f.customerName)} وروستي آرډر څخه په اتومات ډول ډک شو. که اړتیا وي سم یې کړئ.</p>` : ""}
       </div>
-    </div>
     </div>
 
     <div class="actions">
@@ -1463,7 +1439,7 @@ Object.assign(window, {
   state, renderMain, render,
   openPrices, updatePriceField, savePrices, resetPrices, setInventory, deleteCustomer, updateOrderPrice,
   openMore, closeMore, moreItemClick, adjustInventory, toggleAddProduct, submitAddProduct, addCustomProduct,
-  openReceipt, captureAndShare, captureOrderForm,
+  openReceipt, captureAndShare,
 });
 </script>
 </body>
