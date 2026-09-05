@@ -1333,15 +1333,13 @@ function renderForm() {
       <div class="col">
         <h2 class="section">د تادیاتو لیجر</h2>
         <div class="ledger-card">
-          <div class="ledger-row"><span class="ledger-label">پخوانی پاتې بیلانس</span>
+          <div class="ledger-row"><span class="ledger-label">زړه بقايا</span>
             <input id="field-previousBalance" class="money-input" value="${esc(f.previousBalance)}" oninput="updatePrevBalance(this.value)" /></div>
-          <div class="ledger-row"><span class="ledger-label">د دې آرډر ټول (اتومات)</span><span class="num">${fmt(computed.orderTotal)}</span></div>
-          <div class="ledger-row strong"><span class="ledger-label">ټوله ورکړل کیدونکې اندازه</span><span class="num" style="font-weight:700;font-size:15px">${fmt(computed.totalDue)}</span></div>
-          <div class="ledger-row"><span class="ledger-label">ترلاسه شوې اندازه</span>
+          <div class="ledger-row"><span class="ledger-label">اوسنۍ مجموعه</span><span class="num">${fmt(computed.orderTotal)}</span></div>
+          <div class="ledger-row strong"><span class="ledger-label">ټوټل /زړه او نوی</span><span class="num" style="font-weight:700;font-size:15px">${fmt(computed.totalDue)}</span></div>
+          <div class="ledger-row"><span class="ledger-label">رسید</span>
             <input id="field-amountReceived" class="money-input" value="${esc(f.amountReceived)}" oninput="updateMoneyField('amountReceived', this.value)" /></div>
-          <div class="ledger-row"><span class="ledger-label">ووتلي پیسې (لګښتونه / ورکړل شوي)</span>
-            <input id="field-cashOut" class="money-input" value="${esc(f.cashOut)}" oninput="updateMoneyField('cashOut', this.value)" /></div>
-          <div class="ledger-row strong"><span class="ledger-label">پاتې بیلانس (پاتې اندازه)</span>${moneySpan(computed.pendingBalance, computed.pendingBalance > 0 ? "pending" : "received")}</div>
+          <div class="ledger-row strong"><span class="ledger-label">مجموعه بقايا</span>${moneySpan(computed.pendingBalance, computed.pendingBalance > 0 ? "pending" : "received")}</div>
         </div>
         ${!state.touchedPrev && f.customerName.trim() ? `<p class="hint">پخوانی بیلانس د ${esc(f.customerName)} وروستي آرډر څخه په اتومات ډول ډک شو. که اړتیا وي سم یې کړئ.</p>` : ""}
       </div>
